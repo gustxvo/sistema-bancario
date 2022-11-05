@@ -12,7 +12,7 @@ subclasses da classe Conta. Além disso, uma classe opcional foi adicionada para
 
 ### Diagrama de classes
 
-![1° Entregável - Diagrama de classes](./assets/prototipo-mobile-v1.png)
+![1° Entregável - Diagrama de classes](./assets/Primeira%20entrega/Diagrama%20de%20classes.png)
 
 ### Classe de Teste
 
@@ -24,8 +24,8 @@ Uma regra de negócio determina que o saque para conta corrente tenha uma taxa d
 
 ### Diagrama de classes
 
-![2° Entregável - Diagrama de classes](./assets/Segunda Entrega/Diagrama de classes.png)
+![2° Entregável - Diagrama de classes](./assets/Segunda%20Entrega/Diagrama%20de%20classes.png)
 
 ### Classe de Teste
 
-![2° Entregável - Print classe teste](./assets/Segunda Entrega/Print - Teste Taxa.png)
+![2° Entregável - Print classe teste](./assets/Segunda%20Entrega/Print%20-%20Teste%20Taxa.png)
