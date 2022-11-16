@@ -1,14 +1,18 @@
 package model;
 
+import tax.CalculadorImposto;
+import tax.Tributavel;
 import util.CurrencyFormatter;
 
-public class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta implements Tributavel {
 
     private static final double TAXA_SAQUE_CONTA_CORRENTE = 0.2;
+    private static final double TAXA_IMPOSTO = 0.01;
 
     public ContaCorrente(int numeroAgencia, int numeroConta) {
         super(numeroAgencia, numeroConta);
         super.setTipoConta("Conta Corrente");
+        this.getValorImposto();
     }
 
     @Override
@@ -24,5 +28,20 @@ public class ContaCorrente extends Conta {
         } else {
             this.saldo -= valorComTaxa;
         }
+    }
+
+    @Override
+    public void consultar() {
+        double valorImposto = getValorImposto();
+        super.consultar();
+        System.out.println("Imposto da conta: " + valorImposto);
+    }
+
+    @Override
+    public double getValorImposto() {
+        double imposto = this.saldo * TAXA_IMPOSTO;
+        CalculadorImposto.adicionarImposto(imposto);
+        this.saldo -= imposto;
+        return imposto;
     }
 }
