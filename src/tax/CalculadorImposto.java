@@ -2,14 +2,19 @@ package tax;
 
 public class CalculadorImposto implements Tributavel {
 
-    private static double totalImpostos;
+    private static double impostoTotal;
 
     public static void adicionarImposto(double valor) {
-        totalImpostos += valor;
+        impostoTotal += valor;
+    }
+
+    public static void recalcularImposto(double impostoAntigo, double novoImposto) {
+        impostoTotal -= impostoAntigo;
+        adicionarImposto(novoImposto);
     }
 
     @Override
     public double getValorImposto() {
-        return totalImpostos;
+        return impostoTotal;
     }
 }

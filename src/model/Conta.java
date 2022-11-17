@@ -27,15 +27,12 @@ public abstract class Conta {
         this.sacar(valorTransferencia);
 
         contaDestino.depositar(valorTransferencia);
-        System.out.printf("Transferindo %s para %s...\n",
+        System.out.printf("Transferindo %s para %s...\n\n",
                 CurrencyFormatter.getRealFormatado(valorTransferencia),
                 contaDestino.getNomeTitular());
     }
 
     public void consultar() {
-        System.out.println("Número da conta: " + numeroConta);
-        System.out.println("Número da agência: " + numeroAgencia);
-        System.out.println("Tipo da conta: " + tipoConta);
         System.out.println("Nome do titular: " + nomeTitular);
         System.out.println("Saldo da conta: " + CurrencyFormatter.getRealFormatado(saldo));
     }

@@ -12,7 +12,6 @@ public class ContaCorrente extends Conta implements Tributavel {
     public ContaCorrente(int numeroAgencia, int numeroConta) {
         super(numeroAgencia, numeroConta);
         super.setTipoConta("Conta Corrente");
-        this.getValorImposto();
     }
 
     @Override
@@ -26,22 +25,28 @@ public class ContaCorrente extends Conta implements Tributavel {
             System.out.println("Saldo: " +
                     CurrencyFormatter.getRealFormatado(saldo));
         } else {
+            double impostoAntigo = getValorImposto();
             this.saldo -= valorComTaxa;
+            CalculadorImposto.recalcularImposto(impostoAntigo, getValorImposto());
         }
     }
 
     @Override
+    public void depositar(double valorTransferencia) {
+        double impostoAntigo = getValorImposto();
+        super.depositar(valorTransferencia);
+        CalculadorImposto.recalcularImposto(impostoAntigo, getValorImposto());
+    }
+
+    @Override
     public void consultar() {
-        double valorImposto = getValorImposto();
         super.consultar();
-        System.out.println("Imposto da conta: " + valorImposto);
+        System.out.println("Imposto da conta: " + CurrencyFormatter.getRealFormatado(getValorImposto()));
+        System.out.println();
     }
 
     @Override
     public double getValorImposto() {
-        double imposto = this.saldo * TAXA_IMPOSTO;
-        CalculadorImposto.adicionarImposto(imposto);
-        this.saldo -= imposto;
-        return imposto;
+        return this.saldo * TAXA_IMPOSTO;
     }
 }
