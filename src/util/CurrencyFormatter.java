@@ -11,7 +11,7 @@ public class CurrencyFormatter {
         return numberFormatToReal.format(valor);
     }
 
-    public static void printValorImposto(String mensagem, double valor) {
-        System.out.println(mensagem + ": " + getRealFormatado(valor) + "\n");
+    public static void printValor(String mensagem, double valor) {
+        System.out.println(mensagem + ": " + getRealFormatado(valor));
     }
 }

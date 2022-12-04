@@ -4,13 +4,8 @@ public class CalculadorImposto implements Tributavel {
 
     private static double impostoTotal;
 
-    public static void adicionarImposto(double valor) {
+    public static void calcularImposto(double valor) {
         impostoTotal += valor;
-    }
-
-    public static void recalcularImposto(double impostoAntigo, double novoImposto) {
-        impostoTotal -= impostoAntigo;
-        adicionarImposto(novoImposto);
     }
 
     @Override

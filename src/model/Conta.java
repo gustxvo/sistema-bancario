@@ -35,6 +35,7 @@ public abstract class Conta {
     public void consultar() {
         System.out.println("Nome do titular: " + nomeTitular);
         System.out.println("Saldo da conta: " + CurrencyFormatter.getRealFormatado(saldo));
+        System.out.println();
     }
 
     public int getNumeroAgencia() {
