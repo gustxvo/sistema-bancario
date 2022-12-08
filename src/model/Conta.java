@@ -17,11 +17,20 @@ public abstract class Conta {
         Conta.quantidadeContas++;
     }
 
-    public void depositar(double valor) {
-        this.saldo += valor;
-    }
+    public abstract void depositar(double valor);
 
-    public abstract void sacar(double valor);
+    public void sacar(double valor) {
+        if (saldo > valor) {
+            this.saldo -= valor;
+            System.out.println("Operação realizada com sucesso");
+        } else {
+            System.out.println("\u001b[31;1m" +
+                    "Saldo insuficiente\u001b[m");
+
+            System.out.println("Saldo: " +
+                    CurrencyFormatter.getRealFormatado(saldo));
+        }
+    }
 
     public void transferir(Conta contaDestino, double valorTransferencia) {
         this.sacar(valorTransferencia);

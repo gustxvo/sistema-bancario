@@ -15,24 +15,20 @@ public class ContaCorrente extends Conta implements Tributavel {
     }
 
     @Override
+    public void depositar(double valor) {
+        this.saldo += valor;
+    }
+
+    @Override
     public void sacar(double valor) {
         double valorComTaxa = valor + TAXA_SAQUE_CONTA_CORRENTE;
-
-        if (this.saldo < valorComTaxa) {
-            System.out.println("\u001b[31;1m" +
-                    "Saldo insuficiente\u001b[m");
-
-            System.out.println("Saldo: " +
-                    CurrencyFormatter.getRealFormatado(saldo));
-        } else {
-            CurrencyFormatter.printValor("Valor do imposto", getValorImposto());
-            CalculadorImposto.calcularImposto(getValorImposto());
-            this.saldo -= valorComTaxa - getValorImposto();
-        }
+        super.sacar(valorComTaxa);
+        CurrencyFormatter.printValor("Imposto", getValorImposto());
     }
 
     @Override
     public double getValorImposto() {
         return this.saldo * TAXA_IMPOSTO;
     }
+
 }

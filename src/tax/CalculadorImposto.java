@@ -1,15 +1,14 @@
 package tax;
 
-public class CalculadorImposto implements Tributavel {
+public class CalculadorImposto {
 
-    private static double impostoTotal;
+    private double impostoTotal;
 
-    public static void calcularImposto(double valor) {
-        impostoTotal += valor;
+    public void calcular(Tributavel valor) {
+        impostoTotal += valor.getValorImposto();
     }
 
-    @Override
-    public double getValorImposto() {
+    public double getImpostoTotal() {
         return impostoTotal;
     }
 }

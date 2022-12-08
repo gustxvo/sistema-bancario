@@ -6,6 +6,7 @@ import util.CurrencyFormatter;
 public class TesteImposto {
 
     public static void main(String[] args) {
+        CalculadorImposto calculadorImposto = new CalculadorImposto();
 
         ContaCorrente contaCorrente = new ContaCorrente(132, 32132);
         contaCorrente.setNomeTitular("Cadu Pascoal");
@@ -13,29 +14,32 @@ public class TesteImposto {
         contaCorrente.consultar();
 
         contaCorrente.sacar(100);
-        System.out.println();
-
         contaCorrente.consultar();
+
+        calculadorImposto.calcular(contaCorrente);
+        printImpostoTotal(calculadorImposto.getImpostoTotal());
 
         SeguroDeVida seguroDeVida = new SeguroDeVida();
         CurrencyFormatter.printValor("Imposto do Seguro", seguroDeVida.getValorImposto());
-        System.out.println();
 
-        CalculadorImposto calculadorImposto = new CalculadorImposto();
-        printImpostoTotal(calculadorImposto.getValorImposto());
+        calculadorImposto.calcular(seguroDeVida);
+        printImpostoTotal(calculadorImposto.getImpostoTotal());
 
         ContaCorrente cc = new ContaCorrente(155, 5425);
         cc.setNomeTitular("Bruna Laynes");
-
         contaCorrente.transferir(cc, 100);
         contaCorrente.consultar();
-
         cc.consultar();
+
+        calculadorImposto.calcular(cc);
+        printImpostoTotal(calculadorImposto.getImpostoTotal());
+
+        calculadorImposto.calcular(contaCorrente);
 
         // Recalculando valor do imposto total
         System.out.println("Recalculando imposto total");
-        // Esperado: 5,00 + 42,00 + 4,05 = 51,05
-        printImpostoTotal(calculadorImposto.getValorImposto());
+        // Esperado: 4,00 + 42,00 + 4,05 = 51,05
+        printImpostoTotal(calculadorImposto.getImpostoTotal());
     }
 
     // Imprime na tela o valor do imposto formatado na moeda Real
