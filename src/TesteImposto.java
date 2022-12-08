@@ -1,3 +1,6 @@
+import exception.LimiteSaqueException;
+import exception.MultiploNotaException;
+import exception.SaldoInsuficienteException;
 import model.ContaCorrente;
 import model.SeguroDeVida;
 import tax.CalculadorImposto;
@@ -5,7 +8,7 @@ import util.CurrencyFormatter;
 
 public class TesteImposto {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SaldoInsuficienteException, MultiploNotaException, LimiteSaqueException {
         CalculadorImposto calculadorImposto = new CalculadorImposto();
 
         ContaCorrente contaCorrente = new ContaCorrente(132, 32132);

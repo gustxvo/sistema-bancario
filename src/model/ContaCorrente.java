@@ -1,12 +1,14 @@
 package model;
 
-import tax.CalculadorImposto;
+import exception.LimiteSaqueException;
+import exception.MultiploNotaException;
+import exception.TaxaNaoTributadaException;
+import exception.SaldoInsuficienteException;
 import tax.Tributavel;
-import util.CurrencyFormatter;
 
 public class ContaCorrente extends Conta implements Tributavel {
 
-    private static final double TAXA_SAQUE_CONTA_CORRENTE = 0.2;
+    public static final double TAXA_SAQUE_CONTA_CORRENTE = 0.2;
     private static final double TAXA_IMPOSTO = 0.01;
 
     public ContaCorrente(int numeroAgencia, int numeroConta) {
@@ -20,10 +22,13 @@ public class ContaCorrente extends Conta implements Tributavel {
     }
 
     @Override
-    public void sacar(double valor) {
+    public void sacar(double valor) throws SaldoInsuficienteException,
+            MultiploNotaException, LimiteSaqueException {
         double valorComTaxa = valor + TAXA_SAQUE_CONTA_CORRENTE;
+        if (this.saldo == valor) {
+            throw new TaxaNaoTributadaException(this.saldo, valorComTaxa);
+        }
         super.sacar(valorComTaxa);
-        CurrencyFormatter.printValor("Imposto", getValorImposto());
     }
 
     @Override

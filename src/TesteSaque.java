@@ -1,3 +1,6 @@
+import exception.LimiteSaqueException;
+import exception.MultiploNotaException;
+import exception.SaldoInsuficienteException;
 import model.Conta;
 import model.ContaCorrente;
 import model.ContaPoupanca;
@@ -5,7 +8,7 @@ import util.CurrencyFormatter;
 
 public class TesteSaque {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SaldoInsuficienteException, MultiploNotaException, LimiteSaqueException {
 
         double valorSaque = 100.0;
 

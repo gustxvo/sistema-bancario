@@ -1,5 +1,8 @@
 package model;
 
+import exception.LimiteSaqueException;
+import exception.MultiploNotaException;
+import exception.SaldoInsuficienteException;
 import util.CurrencyFormatter;
 
 public abstract class Conta {
@@ -19,20 +22,24 @@ public abstract class Conta {
 
     public abstract void depositar(double valor);
 
-    public void sacar(double valor) {
-        if (saldo > valor) {
-            this.saldo -= valor;
-            System.out.println("Operação realizada com sucesso");
+    public void sacar(double valor) throws
+            SaldoInsuficienteException, MultiploNotaException, LimiteSaqueException {
+        if (this.saldo < valor) {
+            throw new SaldoInsuficienteException(this.saldo, valor);
+        }
+        if (valor > 300) {
+            throw new LimiteSaqueException("Limite de saque excedido");
+        }
+        if (valor % 20 == 0) {
+            throw new MultiploNotaException("Valor do saque não pode ser composto por cédulas de R$20");
         } else {
-            System.out.println("\u001b[31;1m" +
-                    "Saldo insuficiente\u001b[m");
-
-            System.out.println("Saldo: " +
-                    CurrencyFormatter.getRealFormatado(saldo));
+            this.saldo -= valor;
+            System.out.println("Saque efetuado com sucesso");
         }
     }
 
-    public void transferir(Conta contaDestino, double valorTransferencia) {
+    public void transferir(Conta contaDestino, double valorTransferencia) throws
+            SaldoInsuficienteException, MultiploNotaException, LimiteSaqueException {
         this.sacar(valorTransferencia);
 
         contaDestino.depositar(valorTransferencia);
@@ -43,6 +50,7 @@ public abstract class Conta {
 
     public void consultar() {
         System.out.println("Nome do titular: " + nomeTitular);
+        System.out.println("Tipo de Conta: " + tipoConta);
         System.out.println("Saldo da conta: " + CurrencyFormatter.getRealFormatado(saldo));
         System.out.println();
     }
